@@ -3,7 +3,7 @@ from config import get_config
 from flask_cors import CORS
 
 app = Flask(__name__)
-CORS(app)  # Allow frontend access
+CORS(app, origins="*")  # Allow frontend access
 
 @app.route("/config", methods=["GET"])
 def send_config_to_frontend():
