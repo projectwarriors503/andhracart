@@ -1,3 +1,7 @@
+import os
+
+
+
 from flask import Flask, jsonify
 from config import get_config
 from flask_cors import CORS
@@ -21,5 +25,8 @@ def internal_supabase_key():  # example: protected route
     config = get_config()
     return jsonify({"key": config["supabase"]["key"]})  # expose only in secure/internal use
 
+
+
 if __name__ == "__main__":
-    app.run(debug=True)
+    port = int(os.environ.get("PORT", 5000))
+    app.run(host="0.0.0.0", port=port, debug=True)
