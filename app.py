@@ -12,9 +12,11 @@ def send_config_to_frontend():
     return jsonify({
         "firebase": config["firebase"],
         "supabase": {
-            "url": config["supabase"]["url"]
+            "url": config["supabase"]["url"],
+            "anonKey": os.getenv("SUPABASE_ANON_KEY")  # ✅ Add this line
         }
     })
+
 
 @app.route("/admin-supabase-key", methods=["GET"])
 def internal_supabase_key():
