@@ -16,6 +16,6 @@ def get_config():
         },
         "supabase": {
             "url": os.getenv("SUPABASE_URL"),
-            "key": os.getenv("SUPABASE_KEY")  # ⚠️ Only return this to backend logic
+            "anonkey": os.getenv("SUPABASE_KEY")  # ⚠️ Only return this to backend logic
         }
     }
