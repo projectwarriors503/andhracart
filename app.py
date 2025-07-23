@@ -1,17 +1,10 @@
 import os
-
-
-
 from flask import Flask, jsonify
+from flask_cors import CORS
 from config import get_config
 
-from flask_cors import CORS
-
-
-
-
 app = Flask(__name__)
-  CORS(app, origins=["https://andhracart.netlify.app"])# Allow frontend access
+CORS(app, origins=["https://andhracart.netlify.app"])  # ✅ No indentation error
 
 @app.route("/config", methods=["GET"])
 def send_config_to_frontend():
@@ -19,17 +12,14 @@ def send_config_to_frontend():
     return jsonify({
         "firebase": config["firebase"],
         "supabase": {
-            "url": config["supabase"]["url"],
-            # DO NOT return service_role key here
+            "url": config["supabase"]["url"]
         }
     })
 
 @app.route("/admin-supabase-key", methods=["GET"])
-def internal_supabase_key():  # example: protected route
+def internal_supabase_key():
     config = get_config()
-    return jsonify({"key": config["supabase"]["key"]})  # expose only in secure/internal use
-
-
+    return jsonify({"key": config["supabase"]["key"]})
 
 if __name__ == "__main__":
     port = int(os.environ.get("PORT", 5000))
